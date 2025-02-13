@@ -1,4 +1,4 @@
-#___________________________Eenentwintig_Version:11.0_Win_stable.py____________________2025-01-28______#
+#___________________________CLI_Blackjack:11.0_Win_stable.py____________________2025-01-28______#
 import random
 import time
 
