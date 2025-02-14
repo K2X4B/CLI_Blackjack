@@ -73,7 +73,7 @@ def result_text(): # results blurb
         print(house.hand, end=" ")
 def bank_text():
         print("Bank: ", end=" ")
-        print(bank.chips, end="  ")
+        print(bank, end="  ")
         print("Chips")
 def end_results():
     user.score = sum(user.hand)
@@ -85,52 +85,55 @@ def end_results():
         print(house.score)
         bank_text()
     if user.score > house.score and user.bust == False:
-        bank.chips = bank.chips + 3
+        self.bank = self.bank + 3
         print("Results: Congratulations, you won!")
         result_text()
         print(house.score)
         bank_text()
     if house.score > user.score and house.bust == False:
-        bank.chips = bank.chips - 2
+        self.bank = self.bank - 2
         print("Results: The House won. Better luck next time.")
         result_text()
         print(house.score)
         bank_text()
-
 #-------------------------------- Menu Functions --------------------------------------#
 def the_rules():
     print("Rules go here.")
 def the_credits():
     print("The credits go here")
-#--------------------------------- ------------------ ----------------------------------#
-def game():
-    play = True
-    while play == True:
-        start = input("Would  you like to play Blackjack (y/n)?    ")
-        if start == "y":
-            # Section 1
-            player_deal()
-            house_deal()
-            # Section 2
-            while user.score < 22 and play == True:
-                hit = input("Would you like another card (y/n)?   ")
-                if hit == "y":
-                    draw_one()
-                # Section 3
-                if hit == "n":
-                    play = False
-                    print ("Okay, let's see how you  did.")
-                    end_results()
-            if user.score > 21:
-                play = False
-                print("Player Bust!")
-                end_results()
-    again = input("Would you like to play again (y/n)?    ")
-    if again == "y":
-        # reset hands and scores
-        pl
+#-------------------------------------- Loops -----------------------------------------#
 
-game()
+# Set player's starting ammount of chips (20 chips = 10 plays, 2 chips are bet per game)
+bank = 20
+
+# The main/outer loop
+hello = input("Would you like to play Blackjack (y/n)?    ")
+if hello == "y":
+    game_loop = True
+    while game_loop:
+        player_deal()
+        house_deal()
+        while user.score < 22:
+            hit = input("Would you like another card (y/n)?    ")
+            if hit == "y":
+                draw_one()
+            elif hit == "n":
+                print("Okay, let's see how you did.")
+                end_results()
+                game_loop = False
+            elif user.score > 21:
+                print("Player Bust!")
+                game_loop = False
+            else:
+                print("Please answer y or n.     ")
+elif hello == "n":
+    print("Bye!")
+    game_loop = False
+else:
+    print("Please answer y or n.     ")
+
+
+
 
 
 #-------------------------------- old --------------------------------------------------#
